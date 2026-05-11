@@ -1,0 +1,107 @@
+/* CCU·Expo × PwC Design System — Tokens
+   Single source of truth for colors, typography, spacing, and motion.
+   Palette derived from PwC Taiwan brand: Primary Orange #D04A02 + Tangerine + Yellow + Rose + greys + supporting status colors.
+   Type swapped to Helvetica Neue / Georgia per PwC type scheme; web fallbacks via Google Fonts. */
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=JetBrains+Mono:wght@400;500&display=swap");
+
+:root {
+  /* ── PwC brand palette ─────────────────────────────── */
+  /* Primary Orange is the hero color; Tangerine + Yellow + Rose + Red are the sanctioned accent ramps. */
+  --pwc-orange:        #D04A02;   /* Primary Orange — CTAs, highlights, brand accents */
+  --pwc-orange-dark-1: #933401;
+  --pwc-orange-dark-2: #571F01;
+  --pwc-orange-light-1:#FD6412;
+  --pwc-orange-light-2:#FEB791;
+
+  --pwc-tangerine:     #EB8C00;
+  --pwc-tangerine-dark-1: #AE6800;
+  --pwc-tangerine-light-1:#FFA929;
+  --pwc-tangerine-light-2:#FFDCA9;
+
+  --pwc-yellow:        #FFB600;
+  --pwc-yellow-dark-1: #C28A00;
+  --pwc-yellow-light-1:#FFC83D;
+  --pwc-yellow-light-2:#FFECBD;
+
+  --pwc-rose:          #DB536A;
+  --pwc-rose-light-2:  #F1BAC3;
+
+  --pwc-red:           #E0301E;     /* Status Red */
+  --pwc-red-dark-1:    #AA2417;
+  --pwc-red-light-2:   #F7C8C4;
+
+  --pwc-green:         #2C8646;     /* Dark Green 1 — used for "OK" pills since #4EB523 is loud */
+  --pwc-green-2:       #175C2C;     /* Status Green / Dark Green 2 */
+  --pwc-green-light-2: #C4FC9F;
+
+  --pwc-blue:          #0089EB;
+  --pwc-blue-dark-1:   #0060D7;
+  --pwc-blue-light-2:  #B3DCF9;
+
+  --pwc-purple:        #9013FE;     /* sparingly */
+
+  --pwc-black:         #000000;
+  --pwc-grey-dark:     #2D2D2D;
+  --pwc-grey-medium:   #464646;
+  --pwc-grey:          #7D7D7D;
+  --pwc-grey-light:    #DEDEDE;
+
+  /* ── App tokens (alias layer — keep --ccu-* for back-compat) ─────────── */
+  /* Roles map onto PwC palette: ink = near-black grey; primary CTA = orange; success = green-2; etc */
+  --ccu-ink:        #2D2D2D;        /* PwC Dark Grey — primary text & dark surfaces */
+  --ccu-ink-2:      #464646;        /* hover */
+  --ccu-green:      #D04A02;        /* PRIMARY ACTION → PwC Orange (kept var name for back-compat) */
+  --ccu-green-soft: #FEE7D9;        /* soft orange tint, used for "primary" pills/badges */
+  --ccu-lime:       #FFB600;        /* secondary lime → PwC Yellow */
+
+  /* ── Neutrals ─────────────────────────────────────── */
+  --ccu-bg:         #FFFFFF;
+  --ccu-bg-2:       #F8F8F8;        /* subtle warm-grey panel bg */
+  --ccu-bg-3:       #F1F1F1;
+  --ccu-line:       #DEDEDE;        /* PwC Light Grey */
+  --ccu-line-2:     #BFBFBF;
+  --ccu-fg:         #2D2D2D;        /* body text */
+  --ccu-fg-2:       #464646;        /* secondary text */
+  --ccu-fg-3:       #7D7D7D;        /* muted / captions */
+
+  /* ── Semantic / status colors ────────────────────── */
+  --ccu-success:      #2C8646;
+  --ccu-success-soft: #E6F2E9;
+  --ccu-info:         #0089EB;
+  --ccu-info-soft:    #E1F0FB;
+  --ccu-warning:      #FFB600;       /* PwC Yellow */
+  --ccu-warning-soft: #FFECBD;
+  --ccu-danger:       #E0301E;       /* PwC Red */
+  --ccu-danger-soft:  #F7C8C4;
+
+  /* ── Typography ───────────────────────────────────── */
+  /* PwC's official type system is Helvetica Neue (sans) + Georgia (serif display).
+     For web/HTML artifacts we substitute Inter for Helvetica Neue and Source Serif 4 for Georgia
+     because they reproduce the brand metrics on screen and are free. */
+  --ccu-font-display: Georgia, 'Source Serif 4', 'Times New Roman', serif;
+  --ccu-font-sans:    'Helvetica Neue', Helvetica, Arial, Inter, sans-serif;
+  --ccu-font-mono:    'JetBrains Mono', 'Fira Mono', ui-monospace, monospace;
+
+  /* ── Shadows ──────────────────────────────────────── */
+  /* PwC look is flat — most surfaces use border, not shadow. Reserve shadow tokens for transient surfaces. */
+  --ccu-shadow-xs:    0 1px 2px rgba(0,0,0,0.04);
+  --ccu-shadow-sm:    0 1px 3px rgba(0,0,0,0.05), 0 1px 2px rgba(0,0,0,0.04);
+  --ccu-shadow-md:    0 4px 16px rgba(0,0,0,0.06), 0 2px 4px rgba(0,0,0,0.04);
+  --ccu-shadow-lg:    0 12px 32px rgba(0,0,0,0.10), 0 4px 8px rgba(0,0,0,0.05);
+  --ccu-shadow-xl:    0 24px 48px rgba(0,0,0,0.14), 0 8px 16px rgba(0,0,0,0.07);
+  --ccu-shadow-focus: 0 0 0 3px rgba(208,74,2,0.22);
+
+  /* ── Radii ────────────────────────────────────────── */
+  /* PwC house style is square / minimal radius. We keep small radii for usability but drop pills/round-soft. */
+  --ccu-radius-sm:   2px;
+  --ccu-radius-md:   4px;
+  --ccu-radius-lg:   6px;
+  --ccu-radius-xl:   8px;
+  --ccu-radius-pill: 999px;          /* pills still allowed for status chips */
+
+  /* ── Motion ───────────────────────────────────────── */
+  --ccu-dur-fast: 120ms;
+  --ccu-dur-base: 200ms;
+  --ccu-ease:     cubic-bezier(0.2, 0, 0, 1);
+}
