@@ -1,4 +1,4 @@
-/* Airwin·Japan — language switcher (EN / 中文 / 日本語) */
+﻿/* Uwin·Japan — language switcher (EN / 中文 / 日本語) */
 (function () {
   const I18N = {
     en: {
@@ -18,7 +18,7 @@
 
       featuresEyebrow: "Platform capabilities",
       featuresH2: "Everything your CCU operation needs,<br><em>in one auditable place.</em>",
-      featuresLead: "From sensor to submission — Airwin·Japan handles the full chain, with no manual re-entry.",
+      featuresLead: "From sensor to submission — Uwin·Japan handles the full chain, with no manual re-entry.",
       feat1Title: "Real-time digital MRV",
       feat1Body: "IoT sensor data streams directly into a tamper-evident audit trail every 5 seconds. Calibration events and drift corrections are automatically versioned and locked.",
       feat2Title: "Automated emissions calculation",
@@ -31,7 +31,7 @@
       equipInputs: "INPUTS",
 equipOutputs: "OUTPUTS",
 equipResources: "Resource Inputs",
-equipBoundaryLabel: "AIRWIN CCU System Boundary",
+equipBoundaryLabel: "UWIN CCU System Boundary",
 
       darkEyebrow: "Platform walkthrough",
       darkH2: "Your compliance pipeline,<br><em>automated end to end.</em>",
@@ -87,12 +87,12 @@ equipBoundaryLabel: "AIRWIN CCU System Boundary",
       footerApi: "API reference",
       footerSecurity: "Data security",
       footerSupport: "Support",
-      footerCopy: "© 2026 Airwin.Japan  All rights reserved.",
+      footerCopy: "© 2026 Uwin.Japan  All rights reserved.",
 
       // --- New Equipment Solution Keys ---
       navEquipment: "Equipment",
       equipEyebrow: "Carbon & ESG Practice",
-      equipH2: "AIRWIN CCUS Equipment,<br><em>from flue gas to product.</em>",
+      equipH2: "UWIN CCU Equipment,<br><em>from flue gas to product.</em>",
       equipLead: "A single skid-mounted unit captures CO₂ from industrial exhaust and converts it into market-ready NaHCO₃ or Na₂CO₃ — five stages, one compact footprint.",
       stage1Name: "Capture", 
       stage2Name: "Absorption", 
@@ -109,7 +109,7 @@ equipBoundaryLabel: "AIRWIN CCU System Boundary",
       hwFeat3Body: "High-purity NaHCO₃ / Na₂CO₃ ready for food, pharma, and construction supply chains.",
       hwFeat3Tag: "NaHCO₃ · Na₂CO₃",
       hwFeat4Title: "IoT-ready MRV",
-      hwFeat4Body: "Built-in sensors stream live capture and emissions data to the Airwin platform from day one.",
+      hwFeat4Body: "Built-in sensors stream live capture and emissions data to the Uwin platform from day one.",
       hwFeat4Tag: "METI-COMPLIANT"
     },
 
@@ -130,7 +130,7 @@ equipBoundaryLabel: "AIRWIN CCU System Boundary",
 
       featuresEyebrow: "平台能力",
       featuresH2: "CCU 營運所需能力，<br><em>集中於單一可稽核平台</em>",
-      featuresLead: "從感測器到申報文件，Airwin·Japan 串接完整資料鏈，無須重複手動輸入。",
+      featuresLead: "從感測器到申報文件，Uwin·Japan 串接完整資料鏈，無須重複手動輸入。",
       feat1Title: "即時數位 MRV",
       feat1Body: "IoT 感測資料每 5 秒即時寫入防竄改稽核軌跡。校正事件與漂移修正皆會自動版本化並鎖定紀錄。",
       feat2Title: "自動化排放量計算",
@@ -144,7 +144,7 @@ equipBoundaryLabel: "AIRWIN CCU System Boundary",
     equipInputs: "投入端 (INPUTS)",
 equipOutputs: "產出端 (OUTPUTS)",
 equipResources: "資源投入 (Resource Inputs)",
-equipBoundaryLabel: "AIRWIN CCU 系統計算邊界",
+equipBoundaryLabel: "UWIN CCU 系統計算邊界",
 
       darkEyebrow: "平台導覽",
       darkH2: "您的合規流程，<br><em>從端到端全面自動化。</em>",
@@ -200,12 +200,12 @@ equipBoundaryLabel: "AIRWIN CCU 系統計算邊界",
       footerApi: "API 參考",
       footerSecurity: "資料安全",
       footerSupport: "支援",
-      footerCopy: "© 2026 Airwin.Japan  版權所有。",
+      footerCopy: "© 2026 Uwin.Japan  版權所有。",
 
       // --- New Equipment Solution Keys ---
       navEquipment: "機器設備",
       equipEyebrow: "碳管理與 ESG 服務",
-      equipH2: "AIRWIN CCUS 設備，<br><em>廢氣到商品一體成型。</em>",
+      equipH2: "UWIN CCU 設備，<br><em>廢氣到商品一體成型。</em>",
       equipLead: "單一模組化 SKID，從工業廢氣直接捕集 CO₂，轉化為可上市的 NaHCO₃ 或 Na₂CO₃——五道製程，一個精巧機組。",
       stage1Name: "捕捉設備", 
       stage2Name: "吸收", 
@@ -228,7 +228,7 @@ equipBoundaryLabel: "AIRWIN CCU 系統計算邊界",
     equipInputs: "投入 (INPUTS)",
 equipOutputs: "産出 (OUTPUTS)",
 equipResources: "リソース投入",
-equipBoundaryLabel: "AIRWIN CCU システム境界",
+equipBoundaryLabel: "UWIN CCU システム境界",
 
     ja: {
       navFeatures: "機能",
@@ -247,7 +247,7 @@ equipBoundaryLabel: "AIRWIN CCU システム境界",
 
       featuresEyebrow: "プラットフォーム機能",
       featuresH2: "CCU 運用に必要なすべてを、<br><em>監査可能な単一プラットフォームに</em>",
-      featuresLead: "センサーから申請まで、Airwin·Japan がデータチェーン全体をつなぎ、手作業での再入力を不要にします。",
+      featuresLead: "センサーから申請まで、Uwin·Japan がデータチェーン全体をつなぎ、手作業での再入力を不要にします。",
       feat1Title: "リアルタイム・デジタル MRV",
       feat1Body: "IoT センサーデータは 5 秒ごとに、改ざん検知可能な監査証跡へ直接ストリーミングされます。校正イベントとドリフト補正也自動的にバージョン管理され、ロックされます。",
       feat2Title: "排出量計算の自動化",
@@ -312,12 +312,12 @@ equipBoundaryLabel: "AIRWIN CCU システム境界",
       footerApi: "API リファレンス",
       footerSecurity: "データセキュリティ",
       footerSupport: "サポート",
-      footerCopy: "© 2026 Airwin.Japan  All rights reserved.",
+      footerCopy: "© 2026 Uwin.Japan  All rights reserved.",
 
       // --- New Equipment Solution Keys ---
       navEquipment: "設備紹介",
       equipEyebrow: "カーボン & ESG プラクティス",
-      equipH2: "AIRWIN CCUS 設備、<br><em>排気から製品へ、一体型。</em>",
+      equipH2: "UWIN CCU 設備、<br><em>排気から製品へ、一体型。</em>",
       equipLead: "スキッドマウント型の単一ユニットが工業排気からCO₂を直接捕集し、市場直結のNaHCO₃またはNa₂CO₃に転換します——5段階、ひとつのコンパクトな機体。",
       stage1Name: "CO₂ 捕集", 
       stage2Name: "吸収", 
