@@ -892,6 +892,63 @@
         #mon-wrap .dmrv-dtag .dt-bar > i { position: absolute; left: 0; top: 0; bottom: 0; background: #D04A02; border-radius: 2px; box-shadow: 0 0 6px rgba(208,74,2,0.40); }
         #mon-wrap .dmrv-dtag.alarm  .dt-bar > i { background: #E0301E; box-shadow: 0 0 6px rgba(224,48,30,0.50); }
         #mon-wrap .dmrv-dtag .dt-range { display: flex; justify-content: space-between; font-family: var(--dmrv-font-mono); font-size: 9px; color: var(--dmrv-fg-low); margin-top: 3px; letter-spacing: .04em; }
+
+        /* ── Mobile: stack SVG + sensor cards ── */
+        @media (max-width: 640px) {
+          /* Turn hero into a vertical grid */
+          #mon-wrap .dmrv-hero {
+            height: auto !important;
+            overflow: visible;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6px;
+            padding: 6px;
+            background: #fff;
+            border-radius: 10px;
+          }
+          /* Status badge: row 1, full width */
+          #mon-wrap .dmrv-hero-overlay {
+            position: static !important;
+            grid-column: 1 / -1;
+            order: 1;
+            pointer-events: auto;
+            padding: 4px 6px 0;
+          }
+          /* SVG canvas: row 2, full width, fixed height */
+          #mon-wrap .dmrv-hero-canvas {
+            position: relative !important;
+            inset: auto !important;
+            height: 200px;
+            grid-column: 1 / -1;
+            order: 2;
+            border-radius: 8px;
+            overflow: hidden;
+          }
+          /* Hide leader lines and axes — not useful at small size */
+          #mon-wrap .dmrv-leader-svg,
+          #mon-wrap .dmrv-hero-axes { display: none !important; }
+          /* Sensor cards: 2-column grid, rows 3+ */
+          #mon-wrap .dmrv-dtag {
+            position: static !important;
+            left: auto !important; right: auto !important;
+            top: auto !important; bottom: auto !important;
+            min-width: 0 !important;
+            order: 3;
+            font-size: 11px;
+          }
+          #mon-wrap .dmrv-dtag .dt-value { font-size: 15px; }
+          /* Legend: last row, full width */
+          #mon-wrap .dmrv-hero-legend {
+            position: static !important;
+            bottom: auto; left: auto;
+            grid-column: 1 / -1;
+            order: 9;
+            border-radius: 8px;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+          }
+        }
       </style>
 
       <div style="border-radius:16px; padding:4px 0 0; margin-top:32px; margin-bottom:40px;">
