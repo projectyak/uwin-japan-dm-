@@ -251,6 +251,7 @@
     .window-dot { width: 10px; height: 10px; border-radius: 50%; }
     .window-body { padding: 18px; }
 /* ── Equipment Solution (Diagram & Features) ──────────────── */
+
  .equip-section { 
       background: #fff; 
       border-top: 1px solid var(--ccu-line); 
@@ -259,6 +260,7 @@
     }
     
     /* 示意圖容器 */
+
   /* ── 新版圖表容器 ── */
     .equip-master-container {
       display: flex;
@@ -295,7 +297,7 @@
       border: 2px dashed var(--pwc-orange);
       border-radius: 12px;
       padding: 30px 20px;
-      background: #fff;
+      background: #fffdfd;
       display: flex;
       flex-direction: column;
       position: relative;
@@ -342,7 +344,7 @@
       font-size: 11px;
       font-weight: 700;
       color: var(--pwc-orange);
-      background: #FEE7D9;
+      background: #ffffff;
       padding: 4px 10px;
       border-radius: 2px;
       top: -15px;
@@ -753,6 +755,469 @@
       <h2 class="section-h2" data-i18n-html="equipH2">Uwin CCU CO<sub>2</sub> System Flow Diagram</h2>
       <p class="section-lead" data-i18n="equipLead">An integrated skid-mounted system capturing CO₂ from industrial exhaust and converting it into marketable byproducts.</p>
 
+      <!-- ── LIVE MONITORING DIAGRAM ──────────────────────────── -->
+      <style>
+        #mon-wrap {
+          --dmrv-orange:      #D04A02;
+          --dmrv-line:        rgba(0,0,0,0.12);
+          --dmrv-glass-bg:    #FFFFFF;
+          --dmrv-glass-border:rgba(208,74,2,0.20);
+          --dmrv-fg:          #1A1A1A;
+          --dmrv-fg-mid:      rgba(30,30,30,0.65);
+          --dmrv-fg-low:      rgba(30,30,30,0.45);
+          --dmrv-ok:          #2C8646;
+          --dmrv-warn:        #D04A02;
+          --dmrv-err:         #E0301E;
+          --dmrv-shadow-1:    0 2px 12px rgba(0,0,0,0.08), 0 0 0 1px rgba(208,74,2,0.14);
+          --dmrv-font-ui:     "Inter","Helvetica Neue","Segoe UI",sans-serif;
+          --dmrv-font-mono:   "JetBrains Mono","SF Mono",Menlo,Consolas,monospace;
+          font-family: var(--dmrv-font-ui);
+        }
+        #mon-wrap .dmrv-glass {
+          background: var(--dmrv-glass-bg);
+          border: 1px solid var(--dmrv-glass-border);
+          border-radius: 10px;
+          box-shadow: var(--dmrv-shadow-1);
+          position: relative;
+          overflow: hidden;
+        }
+        #mon-wrap .dmrv-hero { height: 560px; position: relative; overflow: hidden; }
+        #mon-wrap .dmrv-hero-canvas {
+          position: absolute; inset: 0;
+          background:
+            #FFFFFF;
+        }
+        #mon-wrap .dmrv-hero-canvas svg { width: 100%; height: 100%; display: block; }
+        #mon-wrap .dmrv-hero-overlay {
+          position: absolute; top: 14px; left: 16px; right: 16px;
+          display: flex; align-items: flex-start; justify-content: space-between;
+          gap: 12px; pointer-events: none; z-index: 5;
+        }
+        #mon-wrap .dmrv-hero-title { display: flex; flex-direction: column; gap: 4px; }
+        #mon-wrap .dmrv-hero-title .h {
+          font-size: 11px; font-weight: 600; text-transform: uppercase;
+          letter-spacing: 0.16em; color: var(--dmrv-fg-low);
+        }
+        #mon-wrap .dmrv-hero-title .h.hero-status {
+          display: inline-flex; align-items: center; gap: 8px;
+          color: var(--dmrv-warn); font-size: 12px;
+          text-transform: none; letter-spacing: 0.04em; font-weight: 700;
+        }
+        #mon-wrap .dmrv-status-pulse {
+          width: 10px; height: 10px; border-radius: 50%;
+          background: var(--dmrv-ok);
+          box-shadow: 0 0 0 3px rgba(44,134,70,0.18), 0 0 10px var(--dmrv-ok);
+          animation: mon-pulse 1.6s ease-in-out infinite;
+        }
+        #mon-wrap .dmrv-status-pulse.warn {
+          background: var(--dmrv-warn);
+          box-shadow: 0 0 0 3px rgba(208,74,2,0.18), 0 0 10px var(--dmrv-warn);
+        }
+        @keyframes mon-pulse { 0%,100%{ opacity:1; transform:scale(1); } 50%{ opacity:.4; transform:scale(.7); } }
+        #mon-wrap .dmrv-hero-legend {
+          position: absolute; bottom: 12px; left: 16px; z-index: 5;
+          display: flex; gap: 14px; align-items: center;
+          padding: 7px 12px;
+          background: rgba(255,255,255,0.88);
+          border: 1px solid rgba(0,0,0,0.10); border-radius: 999px;
+          backdrop-filter: blur(8px);
+        }
+        #mon-wrap .dmrv-hero-legend .item {
+          display: inline-flex; align-items: center; gap: 6px;
+          font-size: 10.5px; color: var(--dmrv-fg-mid); letter-spacing: 0.04em;
+        }
+        #mon-wrap .dmrv-hero-legend .swatch { width: 18px; height: 3px; border-radius: 2px; }
+        #mon-wrap .dmrv-hero-axes {
+          position: absolute; bottom: 14px; right: 16px; z-index: 5;
+          font-family: var(--dmrv-font-mono); font-size: 10px;
+          color: var(--dmrv-fg-low);
+          background: rgba(255,255,255,0.88);
+          border: 1px solid rgba(0,0,0,0.10); border-radius: 6px;
+          padding: 6px 10px; backdrop-filter: blur(8px); letter-spacing: 0.06em;
+        }
+        /* SVG strokes — dark on light canvas */
+        #mon-wrap .dmrv-eq-stroke { stroke: rgba(45,45,45,0.60); stroke-width: 1.2; fill: none; }
+        #mon-wrap .dmrv-eq-stroke-soft { stroke: rgba(45,45,45,0.22); stroke-width: 1; fill: none; }
+        #mon-wrap .dmrv-eq-grid line { stroke: rgba(0,0,0,0.06); stroke-width: 1; }
+        #mon-wrap .dmrv-eq-flow {
+          stroke: #D04A02; stroke-width: 1.8; fill: none;
+          stroke-dasharray: 3 4;
+          filter: drop-shadow(0 0 3px rgba(208,74,2,0.45));
+          animation: mon-flowdash 1.6s linear infinite;
+        }
+        #mon-wrap .dmrv-eq-flow.cool { stroke: #0089EB; filter: drop-shadow(0 0 3px rgba(0,137,235,0.40)); }
+        @keyframes mon-flowdash { to { stroke-dashoffset: -28; } }
+        #mon-wrap .dmrv-hotspot { cursor: pointer; pointer-events: all; transition: transform .15s; transform-origin: center; transform-box: fill-box; }
+        #mon-wrap .dmrv-hotspot circle.outer { fill: rgba(208,74,2,0.10); stroke: #D04A02; stroke-width: 1.4; }
+        #mon-wrap .dmrv-hotspot circle.inner { fill: #D04A02; filter: drop-shadow(0 0 5px rgba(208,74,2,0.65)); }
+        #mon-wrap .dmrv-hotspot circle.ring  { fill: none; stroke: #D04A02; stroke-width: 1.2; opacity: .40; transform-origin: center; transform-box: fill-box; animation: mon-ringpulse 2.4s ease-out infinite; }
+        @keyframes mon-ringpulse { 0%{ transform:scale(.6); opacity:.7; } 100%{ transform:scale(2.2); opacity:0; } }
+        #mon-wrap .dmrv-hotspot.active circle.outer, #mon-wrap .dmrv-hotspot:hover circle.outer { fill: rgba(208,74,2,0.16); stroke: #D04A02; }
+        #mon-wrap .dmrv-hotspot.active circle.inner, #mon-wrap .dmrv-hotspot:hover circle.inner { fill: #D04A02; filter: drop-shadow(0 0 8px rgba(208,74,2,0.70)); }
+        #mon-wrap .dmrv-hotspot.alarm circle.outer { stroke: #E0301E; fill: rgba(224,48,30,0.12); }
+        #mon-wrap .dmrv-hotspot.alarm circle.inner { fill: #E0301E; filter: drop-shadow(0 0 8px rgba(224,48,30,0.70)); }
+        #mon-wrap .dmrv-hotspot.alarm circle.ring  { stroke: #E0301E; }
+        #mon-wrap .dmrv-leader-svg { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 3; }
+        #mon-wrap .dmrv-leader-line { fill: none; stroke: rgba(208,74,2,0.50); stroke-width: 1.2; }
+        #mon-wrap .dmrv-leader-line.active { stroke: rgba(208,74,2,0.70); }
+        #mon-wrap .dmrv-leader-line.alarm  { stroke: rgba(224,48,30,0.70); }
+        /* Floating data tags — white cards on light canvas */
+        #mon-wrap .dmrv-dtag {
+          position: absolute; z-index: 4; pointer-events: auto;
+          min-width: 136px; padding: 8px 11px;
+          background: rgba(255,255,255,0.95);
+          border: 1px solid rgba(0,0,0,0.11); border-radius: 8px;
+          backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+          box-shadow: 0 3px 12px rgba(0,0,0,0.09), inset 0 1px 0 #fff;
+          transition: border-color .18s, transform .18s, box-shadow .18s;
+        }
+        #mon-wrap .dmrv-dtag.active {
+          border-color: rgba(208,74,2,0.50);
+          box-shadow: 0 4px 16px rgba(0,0,0,0.10), 0 0 0 1px rgba(208,74,2,0.25);
+          transform: translateY(-2px);
+        }
+        #mon-wrap .dmrv-dtag.alarm {
+          border-color: rgba(224,48,30,0.50);
+          box-shadow: 0 4px 16px rgba(0,0,0,0.10), 0 0 0 1px rgba(224,48,30,0.25);
+        }
+        #mon-wrap .dmrv-dtag .dt-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 4px; }
+        #mon-wrap .dmrv-dtag .dt-id   { font-family: var(--dmrv-font-mono); font-size: 9.5px; color: var(--dmrv-fg-low); letter-spacing: .06em; }
+        #mon-wrap .dmrv-dtag .dt-status { width: 7px; height: 7px; border-radius: 50%; background: var(--dmrv-ok); box-shadow: 0 0 5px var(--dmrv-ok); }
+        #mon-wrap .dmrv-dtag.active .dt-status { background: var(--dmrv-warn); box-shadow: 0 0 5px var(--dmrv-warn); }
+        #mon-wrap .dmrv-dtag.alarm  .dt-status { background: var(--dmrv-err);  box-shadow: 0 0 5px var(--dmrv-err); }
+        #mon-wrap .dmrv-dtag .dt-label { font-size: 10.5px; color: var(--dmrv-fg-mid); margin-bottom: 3px; letter-spacing: .02em; }
+        #mon-wrap .dmrv-dtag .dt-value { font-family: var(--dmrv-font-mono); font-size: 18px; font-weight: 600; color: #1A1A1A; line-height: 1; letter-spacing: -.01em; display: flex; align-items: baseline; gap: 4px; }
+        #mon-wrap .dmrv-dtag .dt-value .u { font-family: var(--dmrv-font-ui); font-weight: 500; font-size: 11px; color: var(--dmrv-fg-low); }
+        #mon-wrap .dmrv-dtag .dt-bar { margin-top: 6px; height: 3px; background: rgba(0,0,0,0.08); border-radius: 2px; overflow: hidden; position: relative; }
+        #mon-wrap .dmrv-dtag .dt-bar > i { position: absolute; left: 0; top: 0; bottom: 0; background: #D04A02; border-radius: 2px; box-shadow: 0 0 6px rgba(208,74,2,0.40); }
+        #mon-wrap .dmrv-dtag.alarm  .dt-bar > i { background: #E0301E; box-shadow: 0 0 6px rgba(224,48,30,0.50); }
+        #mon-wrap .dmrv-dtag .dt-range { display: flex; justify-content: space-between; font-family: var(--dmrv-font-mono); font-size: 9px; color: var(--dmrv-fg-low); margin-top: 3px; letter-spacing: .04em; }
+      </style>
+
+      <div style="border-radius:16px; padding:4px 0 0; margin-top:32px; margin-bottom:40px;">
+        <div style="display:flex; align-items:center; gap:10px; margin-bottom:16px;">
+          <span style="width:3px;height:18px;background:#D04A02;border-radius:2px;flex-shrink:0;"></span>
+          <span style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.16em;color:#D04A02;">Equipment Real-Time Monitoring</span>
+          <span style="font-size:11px;color:rgba(45,45,45,0.50);margin-left:auto;letter-spacing:0.03em;">8 IoT sensors · ISO 14064-3:2019</span>
+        </div>
+        <div id="mon-wrap">
+          <div class="dmrv-glass dmrv-hero" id="dmrv-hero">
+            <div class="dmrv-hero-canvas">
+              <svg viewBox="0 0 880 480" preserveAspectRatio="xMidYMid meet">
+                <defs>
+                  <linearGradient id="mon-ground" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="rgba(208,74,2,0.16)"/>
+                    <stop offset="100%" stop-color="rgba(208,74,2,0)"/>
+                  </linearGradient>
+                  <linearGradient id="mon-metalSide" x1="0" y1="0" x2="1" y2="0">
+                    <stop offset="0%" stop-color="rgba(0,0,0,0.07)"/>
+                    <stop offset="50%" stop-color="rgba(0,0,0,0.00)"/>
+                    <stop offset="100%" stop-color="rgba(0,0,0,0.07)"/>
+                  </linearGradient>
+                  <linearGradient id="mon-hotJacket" x1="0" y1="0" x2="1" y2="0">
+                    <stop offset="0%" stop-color="rgba(208,74,2,0.22)"/>
+                    <stop offset="50%" stop-color="rgba(208,74,2,0.06)"/>
+                    <stop offset="100%" stop-color="rgba(208,74,2,0.22)"/>
+                  </linearGradient>
+                  <pattern id="mon-hatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+                    <line x1="0" y1="0" x2="0" y2="6" stroke="rgba(0,0,0,0.10)" stroke-width="1"/>
+                  </pattern>
+                  <radialGradient id="mon-haze" cx="50%" cy="60%" r="60%">
+                    <stop offset="0%" stop-color="rgba(208,74,2,0.04)"/>
+                    <stop offset="100%" stop-color="rgba(208,74,2,0)"/>
+                  </radialGradient>
+                </defs>
+                <rect x="0" y="0" width="880" height="480" fill="url(#mon-haze)"/>
+                <g class="dmrv-eq-grid">
+                  <line x1="0"   y1="380" x2="0"   y2="450"/><line x1="40"  y1="380" x2="40"  y2="450"/>
+                  <line x1="80"  y1="380" x2="80"  y2="450"/><line x1="120" y1="380" x2="120" y2="450"/>
+                  <line x1="160" y1="380" x2="160" y2="450"/><line x1="200" y1="380" x2="200" y2="450"/>
+                  <line x1="240" y1="380" x2="240" y2="450"/><line x1="280" y1="380" x2="280" y2="450"/>
+                  <line x1="320" y1="380" x2="320" y2="450"/><line x1="360" y1="380" x2="360" y2="450"/>
+                  <line x1="400" y1="380" x2="400" y2="450"/><line x1="440" y1="380" x2="440" y2="450"/>
+                  <line x1="480" y1="380" x2="480" y2="450"/><line x1="520" y1="380" x2="520" y2="450"/>
+                  <line x1="560" y1="380" x2="560" y2="450"/><line x1="600" y1="380" x2="600" y2="450"/>
+                  <line x1="640" y1="380" x2="640" y2="450"/><line x1="680" y1="380" x2="680" y2="450"/>
+                  <line x1="720" y1="380" x2="720" y2="450"/><line x1="760" y1="380" x2="760" y2="450"/>
+                  <line x1="800" y1="380" x2="800" y2="450"/><line x1="840" y1="380" x2="840" y2="450"/>
+                  <line x1="0" y1="385" x2="880" y2="385"/><line x1="0" y1="407" x2="880" y2="407"/>
+                  <line x1="0" y1="429" x2="880" y2="429"/><line x1="0" y1="451" x2="880" y2="451"/>
+                </g>
+                <path d="M0,380 L880,380 L880,450 L0,450 Z" fill="url(#mon-ground)" opacity="0.6"/>
+                <line x1="0" y1="380" x2="880" y2="380" stroke="rgba(208,74,2,0.65)" stroke-width="1" stroke-dasharray="2 4"/>
+                <!-- COOLING UNIT -->
+                <g>
+                  <rect x="30" y="240" width="120" height="140" class="dmrv-eq-stroke" fill="url(#mon-metalSide)"/>
+                  <rect x="30" y="240" width="120" height="20"  class="dmrv-eq-stroke"/>
+                  <rect x="30" y="340" width="120" height="40"  class="dmrv-eq-stroke" fill="url(#mon-hatch)"/>
+                  <circle cx="70"  cy="280" r="22" class="dmrv-eq-stroke"/>
+                  <circle cx="70"  cy="280" r="4"  class="dmrv-eq-stroke" fill="rgba(0,0,0,0.08)"/>
+                  <path d="M70,260 Q78,272 70,280 M70,300 Q62,288 70,280 M50,280 Q62,272 70,280 M90,280 Q78,288 70,280" class="dmrv-eq-stroke-soft"/>
+                  <circle cx="118" cy="280" r="22" class="dmrv-eq-stroke"/>
+                  <circle cx="118" cy="280" r="4"  class="dmrv-eq-stroke" fill="rgba(0,0,0,0.08)"/>
+                  <path d="M118,260 Q126,272 118,280 M118,300 Q110,288 118,280 M98,280 Q110,272 118,280 M138,280 Q126,288 118,280" class="dmrv-eq-stroke-soft"/>
+                  <line x1="42"  y1="380" x2="42"  y2="395" class="dmrv-eq-stroke"/>
+                  <line x1="138" y1="380" x2="138" y2="395" class="dmrv-eq-stroke"/>
+                  <text x="90" y="412" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="rgba(30,30,30,0.50)" letter-spacing="2">COOLER · C-100</text>
+                </g>
+                <!-- ABSORPTION TOWER -->
+                <g>
+                  <ellipse cx="280" cy="150" rx="38" ry="14" class="dmrv-eq-stroke" fill="url(#mon-metalSide)"/>
+                  <path d="M242,150 L242,360 M318,150 L318,360" class="dmrv-eq-stroke"/>
+                  <ellipse cx="280" cy="360" rx="38" ry="12" class="dmrv-eq-stroke" fill="rgba(0,0,0,0.02)"/>
+                  <ellipse cx="280" cy="200" rx="38" ry="10" class="dmrv-eq-stroke-soft"/>
+                  <ellipse cx="280" cy="240" rx="38" ry="10" class="dmrv-eq-stroke-soft"/>
+                  <ellipse cx="280" cy="280" rx="38" ry="10" class="dmrv-eq-stroke-soft"/>
+                  <ellipse cx="280" cy="320" rx="38" ry="10" class="dmrv-eq-stroke-soft"/>
+                  <path d="M270,122 L290,122 L284,150 L276,150 Z" class="dmrv-eq-stroke" fill="rgba(0,0,0,0.04)"/>
+                  <line x1="280" y1="100" x2="280" y2="122" class="dmrv-eq-stroke"/>
+                  <circle cx="280" cy="100" r="3" class="dmrv-eq-stroke" fill="rgba(0,137,235,0.50)"/>
+                  <line x1="248" y1="372" x2="244" y2="395" class="dmrv-eq-stroke"/>
+                  <line x1="312" y1="372" x2="316" y2="395" class="dmrv-eq-stroke"/>
+                  <text x="280" y="412" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="rgba(30,30,30,0.50)" letter-spacing="2">ABSORBER · T-200</text>
+                </g>
+                <!-- TOP PIPE -->
+                <path d="M280,100 L280,80 L600,80 L600,150" class="dmrv-eq-stroke"/>
+                <path d="M280,100 L280,80 L600,80 L600,150" class="dmrv-eq-flow"/>
+                <circle cx="440" cy="80" r="6" class="dmrv-eq-stroke" fill="rgba(0,0,0,0.06)"/>
+                <line x1="440" y1="76" x2="442" y2="80" class="dmrv-eq-stroke"/>
+                <!-- REACTOR -->
+                <g>
+                  <ellipse cx="600" cy="150" rx="42" ry="12" class="dmrv-eq-stroke" fill="url(#mon-metalSide)"/>
+                  <path d="M558,150 L558,310 L642,310 L642,150 Z" class="dmrv-eq-stroke" fill="url(#mon-hotJacket)"/>
+                  <path d="M566,180 Q600,170 634,180 Q600,200 566,210 Q600,200 634,220 Q600,240 566,250 Q600,240 634,260 Q600,280 566,290 Q600,280 634,300" class="dmrv-eq-stroke-soft"/>
+                  <line x1="558" y1="180" x2="642" y2="180" stroke="rgba(208,74,2,0.5)" stroke-width="0.8" stroke-dasharray="3 2"/>
+                  <line x1="558" y1="220" x2="642" y2="220" stroke="rgba(208,74,2,0.5)" stroke-width="0.8" stroke-dasharray="3 2"/>
+                  <line x1="558" y1="260" x2="642" y2="260" stroke="rgba(208,74,2,0.5)" stroke-width="0.8" stroke-dasharray="3 2"/>
+                  <line x1="558" y1="300" x2="642" y2="300" stroke="rgba(208,74,2,0.5)" stroke-width="0.8" stroke-dasharray="3 2"/>
+                  <ellipse cx="600" cy="310" rx="42" ry="12" class="dmrv-eq-stroke" fill="rgba(0,0,0,0.05)"/>
+                  <rect x="650" y="200" width="22" height="60" class="dmrv-eq-stroke" fill="rgba(0,0,0,0.03)"/>
+                  <line x1="654" y1="208" x2="668" y2="208" class="dmrv-eq-stroke-soft"/>
+                  <line x1="654" y1="216" x2="668" y2="216" class="dmrv-eq-stroke-soft"/>
+                  <line x1="654" y1="224" x2="668" y2="224" class="dmrv-eq-stroke-soft"/>
+                  <circle cx="661" cy="245" r="3" fill="rgba(208,74,2,0.8)"/>
+                  <line x1="600" y1="322" x2="595" y2="395" class="dmrv-eq-stroke"/>
+                  <line x1="600" y1="322" x2="605" y2="395" class="dmrv-eq-stroke"/>
+                  <text x="600" y="412" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="rgba(30,30,30,0.50)" letter-spacing="2">REACTOR · R-300</text>
+                </g>
+                <!-- FEED TANK -->
+                <g>
+                  <ellipse cx="430" cy="270" rx="32" ry="10" class="dmrv-eq-stroke" fill="rgba(0,0,0,0.04)"/>
+                  <path d="M398,270 L398,360 L462,360 L462,270" class="dmrv-eq-stroke" fill="rgba(0,0,0,0.02)"/>
+                  <ellipse cx="430" cy="360" rx="32" ry="10" class="dmrv-eq-stroke"/>
+                  <rect x="408" y="290" width="44" height="6" class="dmrv-eq-stroke" fill="rgba(0,137,235,0.12)"/>
+                  <rect x="408" y="290" width="30" height="6" fill="rgba(0,137,235,0.45)"/>
+                  <path d="M462,310 L520,310 L520,260 L558,260" class="dmrv-eq-stroke"/>
+                  <path d="M462,310 L520,310 L520,260 L558,260" class="dmrv-eq-flow cool"/>
+                  <line x1="402" y1="370" x2="400" y2="395" class="dmrv-eq-stroke"/>
+                  <line x1="458" y1="370" x2="460" y2="395" class="dmrv-eq-stroke"/>
+                  <text x="430" y="412" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="rgba(30,30,30,0.50)" letter-spacing="2">FEED TANK · V-250</text>
+                </g>
+                <!-- PUMP / VALVE -->
+                <g>
+                  <circle cx="200" cy="340" r="14" class="dmrv-eq-stroke" fill="rgba(0,0,0,0.03)"/>
+                  <path d="M200,326 L200,354 M186,340 L214,340" class="dmrv-eq-stroke-soft"/>
+                  <line x1="150" y1="340" x2="186" y2="340" class="dmrv-eq-stroke"/>
+                  <line x1="214" y1="340" x2="240" y2="340" class="dmrv-eq-stroke"/>
+                  <path d="M150,340 L186,340 M214,340 L240,340" class="dmrv-eq-flow cool"/>
+                </g>
+                <!-- REACTOR -> CRYSTALLIZER PIPE -->
+                <path d="M642,200 L720,200 L720,260" class="dmrv-eq-stroke"/>
+                <path d="M642,200 L720,200 L720,260" class="dmrv-eq-flow"/>
+                <!-- CRYSTALLIZER + BINS -->
+                <g>
+                  <path d="M696,260 L744,260 L744,310 L720,340 L696,310 Z" class="dmrv-eq-stroke" fill="rgba(0,0,0,0.03)"/>
+                  <line x1="708" y1="270" x2="732" y2="270" class="dmrv-eq-stroke-soft"/>
+                  <line x1="708" y1="282" x2="732" y2="282" class="dmrv-eq-stroke-soft"/>
+                  <line x1="708" y1="294" x2="732" y2="294" class="dmrv-eq-stroke-soft"/>
+                  <rect x="760" y="320" width="20" height="40" class="dmrv-eq-stroke" fill="rgba(0,0,0,0.02)"/>
+                  <line x1="760" y1="328" x2="780" y2="328" class="dmrv-eq-stroke-soft"/>
+                  <rect x="782" y="320" width="20" height="40" class="dmrv-eq-stroke" fill="rgba(0,0,0,0.02)"/>
+                  <line x1="782" y1="328" x2="802" y2="328" class="dmrv-eq-stroke-soft"/>
+                  <rect x="804" y="320" width="20" height="40" class="dmrv-eq-stroke" fill="rgba(0,0,0,0.02)"/>
+                  <line x1="804" y1="328" x2="824" y2="328" class="dmrv-eq-stroke-soft"/>
+                  <rect x="826" y="320" width="20" height="40" class="dmrv-eq-stroke" fill="rgba(0,0,0,0.02)"/>
+                  <line x1="826" y1="328" x2="846" y2="328" class="dmrv-eq-stroke-soft"/>
+                  <rect x="848" y="320" width="20" height="40" class="dmrv-eq-stroke" fill="rgba(0,0,0,0.02)"/>
+                  <line x1="848" y1="328" x2="868" y2="328" class="dmrv-eq-stroke-soft"/>
+                  <text x="820" y="412" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="rgba(30,30,30,0.50)" letter-spacing="2">CRYSTALLIZER · X-400</text>
+                </g>
+                <line x1="720" y1="340" x2="720" y2="395" class="dmrv-eq-stroke-soft"/>
+                <text x="280" y="92" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" fill="rgba(30,30,30,0.55)" letter-spacing="2">CO₂ IN</text>
+                <text x="800" y="290" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" fill="rgba(30,30,30,0.55)" letter-spacing="2">PRODUCT</text>
+                <!-- HOTSPOTS — IoT A-01 ~ A-06 -->
+                <g class="dmrv-hotspot" data-hot="A-01">
+                  <circle cx="260" cy="130" r="14" class="ring"/>
+                  <circle cx="260" cy="130" r="9"  class="outer"/>
+                  <circle cx="260" cy="130" r="3.5" class="inner"/>
+                </g>
+                <g class="dmrv-hotspot" data-hot="A-02">
+                  <circle cx="300" cy="130" r="14" class="ring"/>
+                  <circle cx="300" cy="130" r="9"  class="outer"/>
+                  <circle cx="300" cy="130" r="3.5" class="inner"/>
+                </g>
+                <g class="dmrv-hotspot" data-hot="A-03">
+                  <circle cx="200" cy="340" r="14" class="ring"/>
+                  <circle cx="200" cy="340" r="9"  class="outer"/>
+                  <circle cx="200" cy="340" r="3.5" class="inner"/>
+                </g>
+                <g class="dmrv-hotspot alarm" data-hot="A-04">
+                  <circle cx="660" cy="220" r="14" class="ring"/>
+                  <circle cx="660" cy="220" r="9"  class="outer"/>
+                  <circle cx="660" cy="220" r="3.5" class="inner"/>
+                </g>
+                <g class="dmrv-hotspot" data-hot="A-05">
+                  <circle cx="740" cy="290" r="14" class="ring"/>
+                  <circle cx="740" cy="290" r="9"  class="outer"/>
+                  <circle cx="740" cy="290" r="3.5" class="inner"/>
+                </g>
+                <g class="dmrv-hotspot" data-hot="A-06">
+                  <circle cx="430" cy="320" r="14" class="ring"/>
+                  <circle cx="430" cy="320" r="9"  class="outer"/>
+                  <circle cx="430" cy="320" r="3.5" class="inner"/>
+                </g>
+              </svg>
+            </div>
+
+            <!-- Leader lines overlay -->
+            <svg class="dmrv-leader-svg" id="dmrv-leader-svg" preserveAspectRatio="none"></svg>
+
+            <!-- Floating Data Tags — IoT A-01 ~ A-06 -->
+            <div class="dmrv-dtag" data-tag="A-01" data-leader-x="260" data-leader-y="130" data-anchor="left" style="left:3%;top:8%;">
+              <div class="dt-head"><span class="dt-id">A-01 · T-200</span><span class="dt-status"></span></div>
+              <div class="dt-label">Inlet CO₂ Concentration NDIR</div>
+              <div class="dt-value">8,240<span class="u">ppm</span></div>
+              <div class="dt-bar"><i style="width:72%"></i></div>
+              <div class="dt-range"><span>6,000</span><span>12,000</span></div>
+            </div>
+            <div class="dmrv-dtag" data-tag="A-02" data-leader-x="300" data-leader-y="130" data-anchor="left" style="left:3%;top:32%;">
+              <div class="dt-head"><span class="dt-id">A-02 · T-200</span><span class="dt-status"></span></div>
+              <div class="dt-label">Outlet CO₂ Concentration NDIR</div>
+              <div class="dt-value">412<span class="u">ppm</span></div>
+              <div class="dt-bar"><i style="width:53%"></i></div>
+              <div class="dt-range"><span>200</span><span>600</span></div>
+            </div>
+            <div class="dmrv-dtag" data-tag="A-03" data-leader-x="200" data-leader-y="340" data-anchor="left" style="left:3%;top:62%;">
+              <div class="dt-head"><span class="dt-id">A-03 · INLET</span><span class="dt-status"></span></div>
+              <div class="dt-label">Exhaust Gas Flow Meter</div>
+              <div class="dt-value">1,420<span class="u">Nm³/h</span></div>
+              <div class="dt-bar"><i style="width:62%"></i></div>
+              <div class="dt-range"><span>800</span><span>1,800</span></div>
+            </div>
+            <div class="dmrv-dtag alarm" data-tag="A-04" data-leader-x="660" data-leader-y="220" data-anchor="right" style="right:5%;top:8%;">
+              <div class="dt-head"><span class="dt-id">A-04 · R-300</span><span class="dt-status"></span></div>
+              <div class="dt-label">CCU Power Consumption JIS C1211</div>
+              <div class="dt-value">342.5<span class="u">kWh</span></div>
+              <div class="dt-bar"><i style="width:71%"></i></div>
+              <div class="dt-range"><span>200</span><span>400</span></div>
+            </div>
+            <div class="dmrv-dtag" data-tag="A-05" data-leader-x="740" data-leader-y="290" data-anchor="right" style="right:5%;top:32%;">
+              <div class="dt-head"><span class="dt-id">A-05 · X-400</span><span class="dt-status"></span></div>
+              <div class="dt-label">NaHCO₃ Output JIS B7611</div>
+              <div class="dt-value">2.84<span class="u">t/batch</span></div>
+              <div class="dt-bar"><i style="width:56%"></i></div>
+              <div class="dt-range"><span>2.0</span><span>3.5</span></div>
+            </div>
+            <div class="dmrv-dtag" data-tag="A-06" data-leader-x="430" data-leader-y="320" data-anchor="right" style="right:5%;top:62%;">
+              <div class="dt-head"><span class="dt-id">A-06 · V-250</span><span class="dt-status"></span></div>
+              <div class="dt-label">NaOH Usage</div>
+              <div class="dt-value">18.2<span class="u">L/h</span></div>
+              <div class="dt-bar"><i style="width:41%"></i></div>
+              <div class="dt-range"><span>10</span><span>30</span></div>
+            </div>
+
+            <!-- Status overlay -->
+            <div class="dmrv-hero-overlay">
+              <div class="dmrv-hero-title">
+                <span class="h hero-status">
+                  <span class="dmrv-status-pulse warn"></span>
+                  Operating · Caution
+                </span>
+              </div>
+            </div>
+
+            <!-- Legend -->
+            <div class="dmrv-hero-legend">
+              <div class="item"><span class="swatch" style="background:#D04A02"></span>CO₂ Flow</div>
+              <div class="item"><span class="swatch" style="background:#0089EB"></span>Cooling Circuit</div>
+              <div class="item"><span class="swatch" style="background:rgba(45,45,45,0.45)"></span>Structure</div>
+            </div>
+
+            <!-- Axes -->
+            <div class="dmrv-hero-axes">+X 12.4m · +Z 4.8m · 4 active sensors</div>
+          </div><!-- /dmrv-hero -->
+        </div><!-- /mon-wrap -->
+      </div>
+
+      <script>
+      (function(){
+        var SVG_W = 880, SVG_H = 480;
+        function $mon(sel, root){ return Array.prototype.slice.call((root||document).querySelectorAll(sel)); }
+        function leaderPath(tag, hero){
+          var w = hero.clientWidth, h = hero.clientHeight;
+          if(!w) return "";
+          var lx = parseFloat(tag.dataset.leaderX);
+          var ly = parseFloat(tag.dataset.leaderY);
+          var tx = lx * (w / SVG_W);
+          var ty = ly * (h / SVG_H);
+          var rect = tag.getBoundingClientRect();
+          var heroRect = hero.getBoundingClientRect();
+          var anchorSide = tag.dataset.anchor;
+          var ax, ay;
+          ay = rect.top - heroRect.top + rect.height / 2;
+          if(anchorSide === "left") ax = rect.left - heroRect.left + rect.width;
+          else                       ax = rect.left - heroRect.left;
+          var midX = (ax + tx) / 2;
+          return "M"+ax+","+ay+" L"+midX+","+ay+" L"+midX+","+ty+" L"+tx+","+ty;
+        }
+        function rebuildLeaders(){
+          var hero = document.getElementById("dmrv-hero");
+          var svg  = document.getElementById("dmrv-leader-svg");
+          if(!hero || !svg) return;
+          var w = hero.clientWidth, h = hero.clientHeight;
+          svg.setAttribute("viewBox","0 0 "+w+" "+h);
+          svg.setAttribute("width",w); svg.setAttribute("height",h);
+          svg.innerHTML = "";
+          $mon(".dmrv-dtag", hero).forEach(function(tag){
+            var p = document.createElementNS("http://www.w3.org/2000/svg","path");
+            var cls = "dmrv-leader-line";
+            if(tag.classList.contains("active")) cls += " active";
+            if(tag.classList.contains("alarm"))  cls += " alarm";
+            p.setAttribute("class", cls);
+            p.setAttribute("d", leaderPath(tag, hero));
+            svg.appendChild(p);
+          });
+        }
+        function setActive(id){
+          var hero = document.getElementById("dmrv-hero");
+          if(!hero) return;
+          $mon(".dmrv-hotspot", hero).forEach(function(g){
+            if(g.dataset.hot === id) g.classList.add("active");
+            else g.classList.remove("active");
+          });
+          $mon(".dmrv-dtag", hero).forEach(function(t){
+            if(t.dataset.tag === id) t.classList.add("active");
+            else t.classList.remove("active");
+          });
+          rebuildLeaders();
+        }
+        function init(){
+          var hero = document.getElementById("dmrv-hero");
+          if(!hero) return;
+          $mon(".dmrv-hotspot", hero).forEach(function(g){
+            g.addEventListener("click", function(){ setActive(g.dataset.hot); });
+          });
+          $mon(".dmrv-dtag", hero).forEach(function(t){
+            t.addEventListener("click", function(){ setActive(t.dataset.tag); });
+          });
+          rebuildLeaders();
+          window.addEventListener("resize", rebuildLeaders);
+        }
+        if(document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
+        else init();
+      })();
+      </script>
+
       <div class="equip-master-container">
         
         <div class="equip-side-col">
@@ -853,6 +1318,7 @@
       </div>
     </div><!-- /section-inner -->
   </section><!-- /equip-section -->
+
 
   <!-- ── DARK PANEL ─────────────────────────────────────────── -->
   <section class="dark-panel" id="platform">
