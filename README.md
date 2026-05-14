@@ -1,14 +1,15 @@
-# Airwin·Japan — Carbon Management Platform
+# UWin·Japan — Carbon Management Platform
 
-Marketing landing page for Airwin·Japan, a CCU (Carbon Capture & Utilization) compliance platform built with PwC Taiwan's design system.
+Marketing landing page for UWin·Japan, a CCU (Carbon Capture & Utilization) compliance platform.
 
 **[Live Demo →](https://projectyak.github.io/uwin-japan-ccu/)**
 
 ## Features
 
 - Hero with live dMRV dashboard preview
-- Platform capabilities & equipment flow diagram
-- ISO 14064-3 / ISO 14067 / METI FY26 compliance sections
+- Hardware: CCU equipment flow diagram & real-time IoT monitoring
+- Software: Platform capabilities (ISO 14064-3 / ISO 14067 / METI FY26)
+- Solution: Compliance pipeline walkthrough + How It Works
 - Trilingual support (EN / 中文 / 日本語)
 - Contact form connected to Google Sheets
 
@@ -17,7 +18,7 @@ Marketing landing page for Airwin·Japan, a CCU (Carbon Capture & Utilization) c
 | File | Description |
 |---|---|
 | `index.html` | Full single-page site |
-| `colors_and_type.css` | PwC-aligned design tokens (colors, typography, spacing) |
+| `colors_and_type.css` | Design tokens (colors, typography, spacing) |
 | `i18n.js` | EN / 中 / 日 translations |
 
 ## Tech
