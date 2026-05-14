@@ -2,7 +2,7 @@
 
 Marketing landing page for Airwin·Japan, a CCU (Carbon Capture & Utilization) compliance platform built with PwC Taiwan's design system.
 
-**[Live Demo →](https://projectyak.github.io/airwin-japan-ccu/)**
+**[Live Demo →](https://projectyak.github.io/uwin-japan-ccu/)**
 
 ## Features
 
