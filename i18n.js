@@ -110,7 +110,18 @@ equipBoundaryLabel: "UWin CCU System Boundary",
       hwFeat3Tag: "NaHCO₃ · Na₂CO₃",
       hwFeat4Title: "IoT-ready MRV",
       hwFeat4Body: "Built-in sensors stream live capture and emissions data to the UWin platform from day one.",
-      hwFeat4Tag: "METI-COMPLIANT"
+      hwFeat4Tag: "METI-COMPLIANT",
+
+      heroTagline: "Capture CO₂. Create revenue. Stay compliant.",
+      heroCtaHardware: "See the hardware",
+      hwFeaturesEyebrow: "Hardware Features",
+      hwFeaturesH3: "Modular, IoT-ready, <em>built to capture.</em>",
+      equipSrcTitle: "Factory Exhaust",
+      util1: "Electricity",
+      util2: "Water",
+      util3: "NaOH",
+      output1Title: "Byproduct",
+      output2Title: "Purified Gas",
     },
 
     zh: {
@@ -147,7 +158,7 @@ equipResources: "資源投入 (Resource Inputs)",
 equipBoundaryLabel: "UWin CCU 系統計算邊界",
 
       darkEyebrow: "解決方案套件",
-      darkH2: "您的合規流程，<br><em>從端到端全面自動化。</em>",
+      darkH2: "硬體與軟體，<br><em>整合為一套方案。</em>",
       darkLead: "以單一平台串接感測器、計算流程與申報作業，取代分散的試算表與一次性資料匯出。",
       dark1Title: "設備狀態一目了然",
       dark1Body: "即時掌握廠內每一座 SKID 的稼動率、振動、溫度與碳捕集率趨勢。",
@@ -223,7 +234,18 @@ equipBoundaryLabel: "UWin CCU 系統計算邊界",
       hwFeat3Tag: "NaHCO₃ · Na₂CO₃",
       hwFeat4Title: "內建 IoT 數位 MRV",
       hwFeat4Body: "設備內建感測器，從上線第一天起即可將即時數據串流至平台。",
-      hwFeat4Tag: "符合 METI 標準"
+      hwFeat4Tag: "符合 METI 標準",
+
+      heroTagline: "捕集 CO₂。創造收益。保持合規。",
+      heroCtaHardware: "了解設備",
+      hwFeaturesEyebrow: "設備特點",
+      hwFeaturesH3: "模組化、IoT就緒，<em>專為捕集而生。</em>",
+      equipSrcTitle: "廠區廢氣",
+      util1: "電力",
+      util2: "水",
+      util3: "NaOH",
+      output1Title: "副產物",
+      output2Title: "淨化氣體",
     },
 
     ja: {
@@ -260,7 +282,7 @@ equipBoundaryLabel: "UWin CCU 系統計算邊界",
       equipBoundaryLabel: "UWin CCU システム境界",
 
       darkEyebrow: "ソリューションパッケージ",
-      darkH2: "コンプライアンス業務を、<br><em>エンドツーエンドで自動化。</em>",
+      darkH2: "ハードウェアとソフトウェア、<br><em>ひとつのパッケージに。</em>",
       darkLead: "センサー、計算、申請を単一プラットフォームで接続し、分散した表計算や一時的なデータエクスポート作業を置き換えます。",
       dark1Title: "設備状態をひと目で把握",
       dark1Body: "工場内すべての SKID について、稼働率、振動、温度、炭素回収率のトレンドをリアルタイムに確認できます。",
@@ -336,7 +358,18 @@ equipBoundaryLabel: "UWin CCU 系統計算邊界",
       hwFeat3Tag: "NaHCO₃ · Na₂CO₃",
       hwFeat4Title: "IoT 対応 MRV",
       hwFeat4Body: "内蔵センサーにより、稼働初日から回収・排出データをプラットフォームへ転送します。",
-      hwFeat4Tag: "METI 準拠"
+      hwFeat4Tag: "METI 準拠",
+
+      heroTagline: "CO₂を回収。収益を生む。コンプライアンスを維持。",
+      heroCtaHardware: "設備を見る",
+      hwFeaturesEyebrow: "設備特長",
+      hwFeaturesH3: "モジュール型、IoT対応、<em>捕集のために設計。</em>",
+      equipSrcTitle: "工場排気",
+      util1: "電力",
+      util2: "水",
+      util3: "NaOH",
+      output1Title: "副産物",
+      output2Title: "精製ガス",
     }
   };
 
