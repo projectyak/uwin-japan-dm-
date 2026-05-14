@@ -19,7 +19,7 @@
       heroCtaSecondary: "See the platform",
       heroMetiReady: "METI-ready exports",
 
-      featuresEyebrow: "CCU·XPO Platform",
+      featuresEyebrow: "Platform · CCU·XPO",
       featuresH2: "Everything your CCU operation needs,<br><em>in one auditable place.</em>",
       featuresLead: "From sensor to submission, CCU·XPO handles the full chain, with no manual re-entry.",
       feat1Title: "Real-time digital MRV",
@@ -96,7 +96,7 @@ equipBoundaryLabel: "UWin CCU System Boundary",
       footerCopy: "© 2026 UWin.Japan  All rights reserved.",
 
       // --- New Equipment Solution Keys ---
-      navEquipment: "UWin CCU Equipment",
+      navEquipment: "Equipment · UWin CCU",
       equipEyebrow: "Carbon & ESG Practice",
       equipH2: "UWin CCU Equipment,<br><em>from flue gas to product.</em>",
       equipLead: "A single skid-mounted unit captures CO₂ from industrial exhaust and converts it into market-ready NaHCO₃ or Na₂CO₃, five stages, one compact footprint.",
@@ -170,7 +170,7 @@ equipBoundaryLabel: "UWin CCU System Boundary",
       heroCtaSecondary: "了解平台",
       heroMetiReady: "METI 申報就緒匯出",
 
-      featuresEyebrow: "CCU·XPO 平台",
+      featuresEyebrow: "平台 · CCU·XPO",
       featuresH2: "CCU 營運所需能力，<br><em>集中於單一可稽核平台</em>",
       featuresLead: "從感測器到申報文件，CCU·XPO 串接完整資料鏈，無須重複手動輸入。",
       feat1Title: "即時數位 MRV",
@@ -248,7 +248,7 @@ equipBoundaryLabel: "UWin CCU 系統計算邊界",
       footerCopy: "© 2026 UWin.Japan  版權所有。",
 
       // --- New Equipment Solution Keys ---
-      navEquipment: "UWin CCU 設備",
+      navEquipment: "設備 · UWin CCU",
       equipEyebrow: "碳管理與 ESG 服務",
       equipH2: "UWin CCU 設備，<br><em>廢氣到商品一體成型。</em>",
       equipLead: "單一模組化 SKID，從工業廢氣直接捕集 CO₂，轉化為可上市的 NaHCO₃ 或 Na₂CO₃，五道製程，一個精巧機組。",
@@ -322,7 +322,7 @@ equipBoundaryLabel: "UWin CCU 系統計算邊界",
       heroCtaSecondary: "プラットフォームを見る",
       heroMetiReady: "METI 対応エクスポート",
 
-      featuresEyebrow: "CCU·XPO プラットフォーム",
+      featuresEyebrow: "プラットフォーム · CCU·XPO",
       featuresH2: "CCU 運用に必要なすべてを、<br><em>監査可能な単一プラットフォームに</em>",
       featuresLead: "センサーから申請まで、CCU·XPO がデータチェーン全体をつなぎ、手作業での再入力を不要にします。",
       feat1Title: "リアルタイム・デジタル MRV",
@@ -400,7 +400,7 @@ equipBoundaryLabel: "UWin CCU 系統計算邊界",
       footerCopy: "© 2026 UWin.Japan  全著作権所有。",
 
       // --- New Equipment Solution Keys ---
-      navEquipment: "UWin CCU 設備",
+      navEquipment: "設備 · UWin CCU",
       equipEyebrow: "カーボン & ESG プラクティス",
       equipH2: "UWin CCU 設備、<br><em>排気から製品へ、一体型。</em>",
       equipLead: "スキッドマウント型の単一ユニットが工業排気からCO₂を直接捕集し、市場直結のNaHCO₃またはNa₂CO₃に転換します。全5段階、ひとつのコンパクトな機体に収めています。",
