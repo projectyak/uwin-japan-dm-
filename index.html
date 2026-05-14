@@ -181,7 +181,7 @@
     .hbf-sub { font-size: 11px; color: rgba(255,255,255,0.55); margin-top: 2px; font-family: var(--ccu-font-mono); }
 
     /* ── Section shared ───────────────────────────────────── */
-    .section { padding: 96px 40px; }
+    .section { padding: 64px 40px; }
     .section-inner { max-width: 1200px; margin: 0 auto; }
     .section-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--pwc-orange); margin-bottom: 14px; display: inline-block; padding-bottom: 6px; border-bottom: 2px solid var(--pwc-orange); }
     .section-h2 { font-family: var(--ccu-font-display); font-weight: 400; font-size: clamp(32px, 3vw, 44px); letter-spacing: -0.005em; line-height: 1.1; color: var(--ccu-ink); text-wrap: balance; }
@@ -252,11 +252,10 @@
     .window-body { padding: 18px; }
 /* ── Equipment Solution (Diagram & Features) ──────────────── */
 
- .equip-section { 
-      background: #fff; 
-      border-top: 1px solid var(--ccu-line); 
-      /* 增加底部間距，原本預設大約是 96px，您可以調大至 140px 或更多 */
-      padding-bottom: 140px; 
+ .equip-section {
+      background: #fff;
+      border-top: 1px solid var(--ccu-line);
+      padding-bottom: 48px;
     }
     
     /* 示意圖容器 */
@@ -1367,6 +1366,9 @@
     </div><!-- /section-inner -->
   </section><!-- /equip-section -->
 
+  <div style="max-width:1200px;margin:0 auto;padding:0 40px;">
+    <hr style="border:none;border-top:1px solid var(--ccu-line);margin:0;">
+  </div>
 
     <!-- ── FEATURES ──────────────────────────────────────────── -->
   <section class="section" id="features">
