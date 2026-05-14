@@ -11,7 +11,7 @@
 
       heroEyebrow: "CARBON & ESG PRACTICE",
       heroH1: "Capture carbon.<br><em>File compliantly.</em>",
-      heroLead: "Real-time equipment monitoring, ISO 14064-3 compliant emissions calculation, and automated METI subsidy packages.",
+      heroLead: "Our integrated CCU equipment and platform capture factory CO₂, convert it into sellable sodium bicarbonate, track every gram in real time, and prepare compliance and METI subsidy documents for you.",
       heroCtaPrimary: "Start a free trial",
       heroCtaSecondary: "See the platform",
       heroMetiReady: "METI-ready exports",
@@ -34,7 +34,7 @@ equipResources: "Resource Inputs",
 equipBoundaryLabel: "UWin CCU System Boundary",
 
       darkEyebrow: "Solution Package",
-      darkH2: "Your compliance pipeline,<br><em>automated end to end.</em>",
+      darkH2: "Hardware & software,<br><em>built as one package.</em>",
       darkLead: "Replace manual spreadsheets and one-off data exports with a single platform that connects sensors, calculations, and filings.",
       dark1Title: "Equipment health at a glance",
       dark1Body: "Uptime, vibration, temperature, and capture-rate trends for every SKID in your plant, updated in real time.",
@@ -225,10 +225,6 @@ equipBoundaryLabel: "UWin CCU 系統計算邊界",
       hwFeat4Body: "設備內建感測器，從上線第一天起即可將即時數據串流至平台。",
       hwFeat4Tag: "符合 METI 標準"
     },
-    equipInputs: "投入 (INPUTS)",
-equipOutputs: "産出 (OUTPUTS)",
-equipResources: "リソース投入",
-equipBoundaryLabel: "UWin CCU システム境界",
 
     ja: {
       navFeatures: "機能",
@@ -257,6 +253,11 @@ equipBoundaryLabel: "UWin CCU システム境界",
       feat4Title: "信頼性の高い監査証跡",
       feat4Body: "すべてのデータポイント、計算、ユーザー操作に、タイムスタンプ、ユーザー指紋、ハッシュチェーンを付与します。Carbon & ESG チームが必要に応じて保証業務を提供します。",
       feat4Tag: "監査 · 読み取り専用共有",
+
+      equipInputs: "投入 (INPUTS)",
+      equipOutputs: "産出 (OUTPUTS)",
+      equipResources: "リソース投入",
+      equipBoundaryLabel: "UWin CCU システム境界",
 
       darkEyebrow: "ソリューションパッケージ",
       darkH2: "コンプライアンス業務を、<br><em>エンドツーエンドで自動化。</em>",
@@ -312,7 +313,7 @@ equipBoundaryLabel: "UWin CCU システム境界",
       footerApi: "API リファレンス",
       footerSecurity: "データセキュリティ",
       footerSupport: "サポート",
-      footerCopy: "© 2026 UWin.Japan  All rights reserved.",
+      footerCopy: "© 2026 UWin.Japan  全著作権所有。",
 
       // --- New Equipment Solution Keys ---
       navEquipment: "設備紹介",
