@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <circle cx="50" cy="50" r="50" fill="#D04A02"/>
+  <text x="50" y="44" font-family="Georgia, 'Times New Roman', serif" font-size="23" font-weight="700" fill="#ffffff" text-anchor="middle" dominant-baseline="middle">UWin</text>
+  <text x="50" y="68" font-family="Georgia, 'Times New Roman', serif" font-size="21" font-weight="700" fill="#ffffff" text-anchor="middle" dominant-baseline="middle">JAPAN</text>
+</svg>
