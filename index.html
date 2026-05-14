@@ -40,6 +40,7 @@
       font-size: 14px; font-weight: 600; color: var(--ccu-ink);
       padding: 8px 16px; border-radius: 2px;
       border: 1px solid var(--ccu-ink);
+      white-space: nowrap;
       transition: background var(--ccu-dur-fast), color var(--ccu-dur-fast);
     }
     .nav-cta a.ghost:hover { background: var(--ccu-ink); color: #fff; }
@@ -47,6 +48,7 @@
       font-size: 14px; font-weight: 600; color: #fff;
       padding: 9px 20px; border-radius: 2px;
       background: var(--pwc-orange);
+      white-space: nowrap;
       transition: background var(--ccu-dur-fast);
     }
     .nav-cta a.primary:hover { background: var(--pwc-orange-dark-1); }
@@ -632,7 +634,7 @@
       </div>
       <div class="nav-cta">
         <a href="#contact" class="ghost" data-i18n="navBookDemo">Book a demo</a>
-        <a href="#contact" class="primary" data-i18n-html="navGetStarted">Get started →</a>
+        <a href="#contact" class="primary" data-i18n="navGetStarted">Get started</a>
         <div class="nav-lang" role="group" aria-label="Language">
           <button type="button" data-lang="en">EN</button>
           <button type="button" data-lang="ja">日</button>
