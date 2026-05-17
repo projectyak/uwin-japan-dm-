@@ -1,0 +1,563 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UWin·Japan — CCU Carbon Management Platform</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,ital,wght@8..60,0,400;8..60,0,600;8..60,1,400;8..60,1,600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --orange:      #D04A02;
+      --orange-dk:   #933401;
+      --orange-lt:   #FD6412;
+      --orange-soft: #FEE7D9;
+      --tangerine:   #EB8C00;
+      --yellow:      #FFB600;
+      --yellow-dk:   #C28A00;
+      --rose:        #DB536A;
+      --dark:        #2D2D2D;
+      --dark-2:      #464646;
+      --grey:        #7D7D7D;
+      --line:        #DEDEDE;
+      --bg-2:        #F8F8F8;
+      --success:     #2C8646;
+      --serif:       Georgia, 'Source Serif 4', serif;
+      --sans:        'Helvetica Neue', Helvetica, Arial, Inter, sans-serif;
+      --mono:        'JetBrains Mono', monospace;
+    }
+
+    @page { size: A4 landscape; margin: 0; }
+
+    body {
+      background: #909090;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 32px;
+      font-family: var(--sans);
+    }
+
+    @media print {
+      body { background: white; padding: 0; min-height: auto; }
+      .print-btn { display: none; }
+    }
+
+    /* ── Page shell ─────────────────────────────────────── */
+    .page {
+      width: 1122px;
+      height: 794px;
+      background: #fff;
+      box-shadow: 0 16px 56px rgba(0,0,0,0.28);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      flex-shrink: 0;
+      position: relative;
+    }
+
+    /* Top accent bar */
+    .top-accent {
+      flex: 0 0 2px;
+      background: linear-gradient(90deg, var(--orange) 0%, var(--tangerine) 55%, var(--yellow) 100%);
+    }
+
+    /* ── Header ─────────────────────────────────────────── */
+    .header {
+      flex: 0 0 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 36px 0 32px;
+      border-bottom: 1px solid var(--line);
+      background: #fff;
+    }
+    .wordmark { display: flex; align-items: center; }
+    .wordmark-logo { height: 28px; width: auto; display: block; }
+    .header-meta {
+      font-size: 10.5px;
+      font-weight: 600;
+      color: var(--grey);
+      letter-spacing: 0.02em;
+      white-space: nowrap;
+    }
+    .header-meta strong { color: var(--dark); font-weight: 700; }
+
+    /* ── Body (left dark | right white) ─────────────────── */
+    .body {
+      flex: 1;
+      display: flex;
+      overflow: hidden;
+    }
+
+    /* ════ LEFT — dark hero panel ════════════════════════ */
+    .left {
+      flex: 0 0 360px;
+      background:
+        radial-gradient(110% 75% at 95% 8%,  rgba(255,182,0,0.30), transparent 55%),
+        radial-gradient(85%  70% at 2%  92%, rgba(208,74,2,0.42),  transparent 65%),
+        #2D2D2D;
+      display: flex;
+      flex-direction: column;
+      padding: 36px 32px 24px 38px;
+      position: relative;
+      overflow: hidden;
+    }
+    .left::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image: radial-gradient(rgba(255,255,255,0.05) 1px, transparent 1px);
+      background-size: 20px 20px;
+      pointer-events: none;
+    }
+    .left-inner { position: relative; z-index: 1; display: flex; flex-direction: column; height: 100%; }
+
+    .eyebrow {
+      display: inline-block;
+      font-size: 8.5px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--orange);
+      border-bottom: 2px solid var(--orange);
+      padding-bottom: 5px;
+      margin-bottom: 22px;
+      width: fit-content;
+    }
+    .hero-h1 {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: 46px;
+      line-height: 1.08;
+      letter-spacing: -0.012em;
+      color: #fff;
+    }
+    .hero-h1 em { font-style: italic; color: var(--orange); display: block; }
+    .hero-tagline {
+      font-size: 13px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.90);
+      margin-top: 22px;
+      letter-spacing: 0.01em;
+      line-height: 1.7;
+    }
+    .hero-lead {
+      font-size: 11.5px;
+      line-height: 1.6;
+      color: rgba(255,255,255,0.55);
+      margin-top: 8px;
+      max-width: 280px;
+    }
+    .cert-row { display: flex; gap: 6px; margin-top: 22px; flex-wrap: wrap; }
+    .cert-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 9px;
+      font-weight: 700;
+      color: rgba(255,255,255,0.68);
+      border: 1px solid rgba(255,255,255,0.18);
+      padding: 3px 9px;
+      border-radius: 999px;
+      letter-spacing: 0.01em;
+      white-space: nowrap;
+    }
+    .cert-pill::before { content: ''; width: 4px; height: 4px; background: var(--orange); border-radius: 50%; flex-shrink: 0; }
+
+
+    /* QR block — 大圖，文字在下 */
+    .qr-spacer-top    { flex: 2; }
+    .qr-spacer-bottom { flex: 1; }
+
+    .qr-block {
+      margin: 0;
+      padding-top: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      border-top: none;
+    }
+    .qr-img { border-radius: 4px; display: block; border: 2px solid rgba(255,255,255,0.15); }
+    .qr-tag { font-size: 8px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.5); }
+
+    /* ════ RIGHT — grey content panel ════════════════════ */
+    .right {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      background: var(--bg-2);
+    }
+
+    /* Features section wrapper — 下方區塊，白色分隔條 */
+    .features-section {
+      flex: 0 0 auto;
+      border-top: 5px solid #ffffff;
+    }
+    .ccu-platform-header {
+      padding: 5px 28px 0 22px;   /* 10px - 5px border = 5px → same visual gap as .equip */
+    }
+    .ccu-platform-header .section-eyebrow {
+      min-width: 130px;   /* stretch to match "UWin CCU EQUIPMENT" underline width */
+    }
+    .equip .section-eyebrow {
+      text-transform: none;   /* preserve UWin mixed-case */
+    }
+    /* Features 2×2 */
+    .features {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      padding: 8px 28px 12px 22px;
+    }
+    .feat-card {
+      background: #ffffff;
+      border: 1px solid var(--line);
+      border-radius: 3px;
+      padding: 12px 14px;
+      position: relative;
+      overflow: hidden;
+    }
+    .feat-card::before { content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 22px; background: var(--orange); }
+    .feat-card:nth-child(2)::before { background: var(--tangerine); }
+    .feat-card:nth-child(3)::before { background: var(--yellow-dk); }
+    .feat-card:nth-child(4)::before { background: var(--rose); }
+    .fc-ico { width: 16px; height: 16px; stroke: var(--orange); stroke-width: 1.8; fill: none; }
+    .feat-card:nth-child(2) .fc-ico { stroke: var(--tangerine); }
+    .feat-card:nth-child(3) .fc-ico { stroke: var(--yellow-dk); }
+    .feat-card:nth-child(4) .fc-ico { stroke: var(--rose); }
+    .fc-title { font-family: var(--serif); font-size: 13px; color: var(--dark); margin-top: 6px; font-weight: 400; letter-spacing: -0.003em; line-height: 1.2; }
+    .fc-body { font-size: 10.5px; color: var(--dark-2); margin-top: 4px; line-height: 1.5; }
+    .fc-tag { display: inline-block; margin-top: 6px; font-size: 8px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--orange-dk); background: var(--orange-soft); padding: 1px 7px; border-radius: 2px; }
+    .feat-card:nth-child(2) .fc-tag { color: #7A4A00; background: #FFF0D6; }
+    .feat-card:nth-child(3) .fc-tag { color: #705000; background: #FFF7D6; }
+    .feat-card:nth-child(4) .fc-tag { color: #8A1A30; background: #FAE8EC; }
+
+    /* Equipment — 上半，flex:1 撐滿剩餘 */
+    .equip {
+      flex: 1;
+      padding: 10px 22px 10px 22px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .section-eyebrow {
+      font-size: 8px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--orange);
+      border-bottom: 2px solid var(--orange);
+      display: inline-block;
+      align-self: flex-start;   /* prevent flex-column stretch */
+      padding-bottom: 4px;
+      margin-bottom: 8px;
+      white-space: nowrap;
+    }
+    .equip-title { font-family: var(--serif); font-size: 14px; font-weight: 400; color: var(--dark); margin-bottom: 2px; }
+    .equip-lead { font-size: 10px; color: var(--dark-2); line-height: 1.45; margin-bottom: 6px; }
+
+    .flow-wrap { display: flex; align-items: center; margin-bottom: 6px; flex: 1; }
+    .flow-io { flex: 0 0 66px; background: #fff; border: 1px solid var(--line); border-radius: 3px; padding: 7px 5px; text-align: center; }
+    .flow-io-lbl { font-size: 7px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; background: var(--dark); color: #fff; padding: 1px 5px; border-radius: 2px; display: inline-block; margin-bottom: 4px; }
+    .flow-io-lbl.out { background: var(--orange); }
+    .flow-io-name { font-size: 9px; font-weight: 700; color: var(--dark); line-height: 1.25; }
+    .flow-io-sub { font-family: var(--mono); font-size: 8px; color: var(--grey); margin-top: 1px; }
+    .flow-arr { flex: 0 0 12px; text-align: center; color: var(--orange); font-weight: 700; font-size: 10px; }
+    .flow-boundary { flex: 1; border: 2px dashed var(--orange); border-radius: 6px; padding: 10px 6px 8px; position: relative; background: rgba(208,74,2,0.025); }
+    .flow-boundary-lbl { position: absolute; top: -8px; left: 50%; transform: translateX(-50%); background: var(--orange); color: #fff; font-size: 7px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; padding: 1px 8px; border-radius: 8px; white-space: nowrap; }
+    .flow-stages { display: flex; align-items: center; justify-content: space-between; }
+    .flow-stage { text-align: center; flex: 1; }
+    .flow-stage-num { width: 15px; height: 15px; background: var(--dark); color: #fff; border-radius: 50%; font-size: 8px; font-weight: 700; display: grid; place-items: center; margin: 0 auto 3px; }
+    .flow-stage-name { font-size: 8.5px; font-weight: 700; color: var(--dark); }
+    .flow-stage-arr { color: var(--orange); font-size: 9px; font-weight: bold; opacity: 0.5; }
+
+    .spec-row { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 6px; margin-top: 6px; }
+    .spec-box { background: #fff; border: 1px solid var(--line); border-radius: 3px; padding: 7px 8px; border-top: 2px solid var(--orange); }
+    .spec-box:nth-child(2) { border-top-color: var(--tangerine); }
+    .spec-box:nth-child(3) { border-top-color: var(--yellow); }
+    .spec-box:nth-child(4) { border-top-color: var(--rose); }
+    .spec-ico { width: 13px; height: 13px; stroke: var(--orange); stroke-width: 1.8; fill: none; display: block; margin-bottom: 5px; }
+    .spec-box:nth-child(2) .spec-ico { stroke: var(--tangerine); }
+    .spec-box:nth-child(3) .spec-ico { stroke: var(--yellow-dk); }
+    .spec-box:nth-child(4) .spec-ico { stroke: var(--rose); }
+    .spec-val { font-family: var(--serif); font-size: 14px; font-weight: 400; color: var(--dark); line-height: 1; }
+    .spec-lbl { font-size: 9px; color: var(--grey); margin-top: 2px; line-height: 1.25; }
+
+    /* HOW IT WORKS — white rounded card inside .equip */
+    .how-card {
+      flex: 0 0 auto;
+      background: #ffffff;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 10px 14px 10px 14px;
+      margin-top: 8px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .how-card .section-eyebrow { margin-bottom: 8px; }
+    .how-sentence { font-size: 11.5px; color: var(--dark-2); line-height: 1.65; }
+
+    /* 三步驟橫排框框 */
+    .steps {
+      display: flex;
+      flex-direction: row;
+      gap: 10px;
+      flex: 1;
+      align-items: stretch;
+      margin-top: 0;
+    }
+    .step {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 10px 12px;
+      background: var(--bg-2);
+      border: 1px solid var(--line);
+      border-top: 2px solid var(--orange);
+      border-radius: 4px;
+    }
+    .step:nth-child(2) { border-top-color: var(--tangerine); }
+    .step:nth-child(3) { border-top-color: var(--yellow-dk); }
+    .step-num {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 22px;
+      color: var(--orange);
+      line-height: 1;
+      letter-spacing: -0.02em;
+      margin-bottom: 6px;
+    }
+    .step:nth-child(2) .step-num { color: var(--tangerine); }
+    .step:nth-child(3) .step-num { color: var(--yellow-dk); }
+    .step-text { flex: 1; }
+    .step-title { font-family: var(--serif); font-size: 11.5px; color: var(--dark); font-weight: 400; line-height: 1.3; }
+    .step-body { font-size: 10px; color: var(--dark-2); margin-top: 3px; line-height: 1.5; }
+
+    /* ── Footer ─────────────────────────────────────────── */
+    .footer {
+      flex: 0 0 46px;
+      background: var(--dark);
+      border-top: 2px solid var(--orange);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 36px 0 32px;
+    }
+    .footer-wordmark { display: flex; align-items: center; }
+    .footer-wordmark-logo { height: 22px; width: auto; display: block; filter: brightness(0) invert(1); }
+    .footer-url { font-family: var(--mono); font-size: 9.5px; color: rgba(255,255,255,0.38); white-space: nowrap; }
+    .footer-copy { font-size: 9px; color: rgba(255,255,255,0.35); white-space: nowrap; }
+    .footer-stds { display: flex; gap: 5px; }
+    .footer-std { font-family: var(--mono); font-size: 8px; color: rgba(255,255,255,0.35); border: 1px solid rgba(255,255,255,0.14); border-radius: 2px; padding: 2px 6px; white-space: nowrap; }
+
+    /* Print button */
+    .print-btn {
+      position: fixed; bottom: 20px; right: 20px;
+      background: var(--orange); color: #fff;
+      font-family: var(--sans); font-weight: 700; font-size: 12px;
+      border: none; border-radius: 3px;
+      padding: 10px 20px; cursor: pointer;
+      box-shadow: 0 4px 14px rgba(208,74,2,0.4);
+      z-index: 100;
+    }
+    .print-btn:hover { background: var(--orange-dk); }
+  </style>
+</head>
+<body>
+
+<button class="print-btn" onclick="window.print()">Print / Export PDF →</button>
+
+<div class="page">
+
+  <!-- Accent bar -->
+  <div class="top-accent"></div>
+
+  <!-- Header -->
+  <div class="header">
+    <div class="wordmark"><img class="wordmark-logo" src="uwin-logo.png" alt="UWin Japan"></div>
+    <div class="header-meta"><strong>Carbon &amp; ESG Practice</strong> &nbsp;·&nbsp; Carbon Capture &amp; Utilisation Platform</div>
+  </div>
+
+  <!-- Body -->
+  <div class="body">
+
+    <!-- ══ LEFT dark panel ══════════════════════════════ -->
+    <div class="left">
+      <div class="left-inner">
+
+        <div class="eyebrow">CARBON &amp; ESG PRACTICE</div>
+
+        <h1 class="hero-h1">
+          Capture carbon.
+          <em>File compliantly.</em>
+        </h1>
+
+        <p class="hero-tagline">Capture CO₂. Create revenue. Stay compliant.</p>
+        <p class="hero-lead">Our integrated CCU equipment and platform capture factory CO₂, convert it into sellable sodium bicarbonate, track every gram in real time, and prepare compliance and METI subsidy documents for you.</p>
+
+        <div class="cert-row">
+          <span class="cert-pill">ISO 14064-3:2019</span>
+          <span class="cert-pill">ISO 14067</span>
+          <span class="cert-pill">METI-ready</span>
+        </div>
+
+
+        <!-- spacer 2/3 above QR -->
+        <div class="qr-spacer-top"></div>
+
+        <!-- QR -->
+        <div class="qr-block">
+          <img class="qr-img"
+               src="https://api.qrserver.com/v1/create-qr-code/?size=110x110&data=https%3A%2F%2Fprojectyak.github.io%2Fuwin-japan-ccu%2F&bgcolor=2d2d2d&color=ffffff&margin=2"
+               alt="QR Code" width="110" height="110">
+          <div class="qr-tag">Scan to visit our website</div>
+        </div>
+
+        <!-- spacer 1/3 below QR -->
+        <div class="qr-spacer-bottom"></div>
+
+      </div>
+    </div>
+
+    <!-- ══ RIGHT white panel ════════════════════════════ -->
+    <div class="right">
+
+      <!-- UWIN CCU EQUIPMENT (includes How it works card) -->
+      <div class="equip">
+        <div class="section-eyebrow">UWin CCU EQUIPMENT</div>
+        <div class="equip-title">CO₂ System Flow Diagram</div>
+        <div class="equip-lead">Skid-mounted system converting industrial exhaust into marketable byproducts.</div>
+
+        <div class="flow-wrap">
+          <div class="flow-io">
+            <div class="flow-io-lbl">INPUTS</div>
+            <div class="flow-io-name">Factory Exhaust</div>
+            <div class="flow-io-sub">+ NaOH</div>
+          </div>
+          <div class="flow-arr">→</div>
+          <div class="flow-boundary">
+            <div class="flow-boundary-lbl">UWin CCU System Boundary</div>
+            <div class="flow-stages">
+              <div class="flow-stage"><div class="flow-stage-num">1</div><div class="flow-stage-name">Capture</div></div>
+              <div class="flow-stage-arr">→</div>
+              <div class="flow-stage"><div class="flow-stage-num">2</div><div class="flow-stage-name">Absorption</div></div>
+              <div class="flow-stage-arr">→</div>
+              <div class="flow-stage"><div class="flow-stage-num">3</div><div class="flow-stage-name">Heat Mgmt</div></div>
+              <div class="flow-stage-arr">→</div>
+              <div class="flow-stage"><div class="flow-stage-num">4</div><div class="flow-stage-name">Crystallization</div></div>
+              <div class="flow-stage-arr">→</div>
+              <div class="flow-stage"><div class="flow-stage-num">5</div><div class="flow-stage-name">Separation</div></div>
+            </div>
+          </div>
+          <div class="flow-arr">→</div>
+          <div class="flow-io">
+            <div class="flow-io-lbl out">OUTPUTS</div>
+            <div class="flow-io-name">Byproduct</div>
+            <div class="flow-io-sub">NaHCO₃ / Na₂CO₃</div>
+          </div>
+        </div>
+
+        <div class="spec-row">
+          <div class="spec-box">
+            <svg class="spec-ico" viewBox="0 0 24 24"><path d="M22 3H2l8 9.46V19l4 2v-8.54L22 3z"/></svg>
+            <div class="spec-val">&gt;90%</div><div class="spec-lbl">CO₂ capture rate</div>
+          </div>
+          <div class="spec-box">
+            <svg class="spec-ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <div class="spec-val">6–8 wk</div><div class="spec-lbl">Plug-and-play deploy</div>
+          </div>
+          <div class="spec-box">
+            <svg class="spec-ico" viewBox="0 0 24 24"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><line x1="12" y1="20" x2="12.01" y2="20"/></svg>
+            <div class="spec-val">IoT</div><div class="spec-lbl">Built-in MRV sensors</div>
+          </div>
+          <div class="spec-box">
+            <svg class="spec-ico" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+            <div class="spec-val">Skid</div><div class="spec-lbl">Minimal civil work</div>
+          </div>
+        </div>
+
+        <!-- HOW IT WORKS — white rounded card inside equipment section -->
+        <div class="how-card">
+          <div class="section-eyebrow">HOW IT WORKS</div>
+          <p class="how-sentence">Purpose-built to capture CO₂ with &gt;90% precision, recover it as sellable sodium bicarbonate, and measure every gram through integrated IoT sensors.</p>
+        </div>
+
+      </div><!-- /equip -->
+
+      <!-- Lower: CCU PLATFORM header + Features 2×2 -->
+      <div class="features-section">
+        <div class="ccu-platform-header">
+          <div class="section-eyebrow">CCU PLATFORM</div>
+        </div>
+        <div class="features">
+          <div class="feat-card">
+            <svg class="fc-ico" viewBox="0 0 24 24">
+              <path d="M4.9 16.1C3 14.2 2 11.7 2 9c0-5.5 4.5-10 10-10s10 4.5 10 10c0 2.7-1 5.2-2.9 7.1"/>
+              <path d="M7.8 13.2C6.7 12.1 6 10.6 6 9c0-3.3 2.7-6 6-6s6 2.7 6 6c0 1.6-.7 3.1-1.8 4.2"/>
+              <line x1="12" y1="9" x2="12" y2="22"/>
+              <line x1="8" y1="22" x2="16" y2="22"/>
+            </svg>
+            <div class="fc-title">Real-time digital MRV</div>
+            <div class="fc-body">IoT sensor data streams into a tamper-evident audit trail every 5 s. Calibration events are automatically versioned and locked.</div>
+            <span class="fc-tag">ISO 14064-3:2019</span>
+          </div>
+          <div class="feat-card">
+            <svg class="fc-ico" viewBox="0 0 24 24">
+              <rect x="4" y="2" width="16" height="20" rx="2"/>
+              <line x1="8" y1="6" x2="16" y2="6"/>
+              <line x1="16" y1="14" x2="16" y2="18"/>
+              <line x1="8" y1="14" x2="8" y2="14" stroke-linecap="round" stroke-width="2"/>
+              <line x1="12" y1="18" x2="12" y2="18" stroke-linecap="round" stroke-width="2"/>
+            </svg>
+            <div class="fc-title">Automated emissions calculation</div>
+            <div class="fc-body">Approved factors from IPCC, METI &amp; JIS. Every computation is explainable and fully traceable to source data.</div>
+            <span class="fc-tag">ISO 14067</span>
+          </div>
+          <div class="feat-card">
+            <svg class="fc-ico" viewBox="0 0 24 24">
+              <path d="M4 22h14a2 2 0 002-2V7.5L14.5 2H6a2 2 0 00-2 2v4"/>
+              <polyline points="14 2 14 8 20 8"/>
+              <path d="M3 15l2 2 4-4"/>
+            </svg>
+            <div class="fc-title">METI subsidy packages</div>
+            <div class="fc-body">One click generates a compliant ZIP — pre-filled form, sensor evidence, and audit hash — ready for NEDO submission.</div>
+            <span class="fc-tag">METI FY2026</span>
+          </div>
+          <div class="feat-card">
+            <svg class="fc-ico" viewBox="0 0 24 24">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              <polyline points="9 12 11 14 15 10"/>
+            </svg>
+            <div class="fc-title">Assured audit trail</div>
+            <div class="fc-body">Every data point and user action carries a timestamp, fingerprint, and hash chain. Assurance shared on demand.</div>
+            <span class="fc-tag">Audit · read-only share</span>
+          </div>
+        </div>
+      </div><!-- /features-section -->
+
+    </div><!-- /right -->
+  </div><!-- /body -->
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-wordmark"><img class="footer-wordmark-logo" src="uwin-logo.png" alt="UWin Japan"></div>
+
+    <div class="footer-copy">© 2026 UWin Japan · Carbon &amp; ESG Practice</div>
+    <div class="footer-stds">
+      <span class="footer-std">ISO 14064-3</span>
+      <span class="footer-std">ISO 14067</span>
+      <span class="footer-std">METI FY26</span>
+    </div>
+  </div>
+
+</div><!-- /page -->
+
+</body>
+</html>
+
