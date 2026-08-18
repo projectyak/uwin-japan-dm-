@@ -1,0 +1,31 @@
+/* ── Theme: UWin Japan (PwC Taiwan × Airwin) ────────────────
+   Override design tokens for the Japan market.
+   Load AFTER colors_and_type.css to override base tokens.
+   To create a new market theme, copy this file and adjust the variables below. */
+
+:root {
+  /* Brand colours — Japan uses PwC orange palette */
+  --theme-primary:        #D04A02;   /* main CTA / highlight */
+  --theme-primary-dark:   #933401;
+  --theme-primary-light:  #FD6412;
+  --theme-primary-soft:   #FEE7D9;
+
+  --theme-accent-1:       #EB8C00;   /* tangerine */
+  --theme-accent-2:       #FFB600;   /* yellow */
+  --theme-accent-3:       #DB536A;   /* rose */
+
+  /* Map theme tokens onto app tokens */
+  --pwc-orange:           var(--theme-primary);
+  --pwc-orange-dark-1:    var(--theme-primary-dark);
+  --pwc-orange-light-1:   var(--theme-primary-light);
+  --pwc-tangerine:        var(--theme-accent-1);
+  --pwc-yellow:           var(--theme-accent-2);
+  --pwc-rose:             var(--theme-accent-3);
+
+  /* Logo paths — swap per market */
+  --theme-logo:           url('../logo.png');
+  --theme-logo-mono:      url('../uwin-logo.png');   /* white/inverted version for dark bg */
+
+  /* Market label (used in footer / eyebrow) */
+  --theme-market:         "Japan";
+}
