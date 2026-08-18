@@ -2,7 +2,12 @@
 
 Marketing landing page for UWin·Japan, a CCU (Carbon Capture & Utilization) compliance platform.
 
-**[Live Demo →](https://projectyak.github.io/uwin-japan-ccu/)**
+## Demo Links
+
+| | Link |
+|---|---|
+| 🌐 **Website** | [projectyak.github.io/uwin-japan-dm-/](https://projectyak.github.io/uwin-japan-dm-/) |
+| 📄 **DM (Print)** | [projectyak.github.io/uwin-japan-dm-/Airwin%20Japan%20DM.html](https://projectyak.github.io/uwin-japan-dm-/Airwin%20Japan%20DM.html) |
 
 ## Features
 
@@ -17,7 +22,8 @@ Marketing landing page for UWin·Japan, a CCU (Carbon Capture & Utilization) com
 
 | File | Description |
 |---|---|
-| `index.html` | Full single-page site |
+| `index.html` | Full single-page website |
+| `Airwin Japan DM.html` | A4 landscape print DM |
 | `colors_and_type.css` | Design tokens (colors, typography, spacing) |
 | `i18n.js` | EN / 中 / 日 translations |
 
